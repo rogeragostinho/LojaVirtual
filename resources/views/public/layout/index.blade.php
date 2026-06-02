@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-lg bg-primary bg-gradiente py-3 shadow">
             <div class="container-md ">
                 <div class="col-4">
-                    <a class="navbar-brand me-5 text-white" href="{{ route('index') }}">Loja Virtual</a>
+                    <a class="navbar-brand me-5 text-white" href="{{ route('index') }}">NexaStore</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
