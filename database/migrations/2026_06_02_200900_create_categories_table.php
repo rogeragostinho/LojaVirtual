@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contatos', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('cpf');
-            $table->string('cep');
-            $table->string('whatsapp');
-            $table->string('numero');
+
+            $table->string('name');
+            $table->tinyText('description')->nullable();
+            $table->string('slug')->unique();
+
             $table->timestamps();
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contatos');
+        Schema::dropIfExists('categories');
     }
 };
