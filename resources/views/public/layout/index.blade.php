@@ -61,13 +61,13 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{ route('admin.index') }}">Dashboard</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('login.logout') }}">Logout</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                                     </ul>
                                 </li>
                             @else
                                 <li class="nav-item">
                                     <a class="nav-link active text-white" aria-current="page"
-                                        href="{{ route('login.form') }}">Login</a>
+                                        href="{{ route('login') }}">Login</a>
                                 </li>
                             @endauth
                         </ul>

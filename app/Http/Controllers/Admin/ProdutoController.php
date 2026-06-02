@@ -14,8 +14,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::orderBy('created_at', 'desc')->get();
-        return view('admin.produtos.index', compact('produtos'));
+        $produtos = Produto::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.produtos', compact('produtos'));
     }
 
     /**

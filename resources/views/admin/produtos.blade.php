@@ -69,7 +69,7 @@
                             <td>{{ number_format($produto->preco, 2, ',', '.') }} Kz</td>
                             <td>{{ $produto->categoria->nome }}</td>
                             <td><button
-                                    href="{{ route('site.atualizacarrinho') }}"class="btn  btn-warning me-1 rounded-circle"><svg
+                                    href="{{ route('carrinho.atualizar') }}"class="btn  btn-warning me-1 rounded-circle"><svg
                                         xmlns="http://www.w3.org/2000/svg" fill="white" height="24"
                                         viewBox="0 -960 960 960" width="24">
                                         <path
