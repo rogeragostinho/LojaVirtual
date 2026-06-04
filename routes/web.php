@@ -3,12 +3,19 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProdutoController as AdminProdutoController;
 use App\Http\Controllers\Admin\CategoriaController as AdminCategoriaController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Public\CarrinhoController;
 use App\Http\Controllers\Public\ProdutoController as PublicProdutoController;
 use App\Http\Controllers\Public\SiteController;
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+
+
+
+
 
 /**
  * PUBLIC
@@ -40,6 +47,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::controller(AdminDashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('index')->middleware(['auth', 'checkemail']);    
     });
+
+    Route::resources([
+        'categories' => CategoryController::class,
+        'products' => ProductController::class
+    ]);
 
     /**
      * Produtos

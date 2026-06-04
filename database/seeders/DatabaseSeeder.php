@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,12 +19,13 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'password' => bcrypt('test')
+            'password' => bcrypt('test'),
+            'role' => UserRole::SUPER_ADMIN
         ]);
-        $this->call([
+        /*$this->call([
             //UsersSeeder::class,
             CategoriasSeeder::class,
             ProdutosSeeder::class,
-        ]);
+        ]);*/
     }
 }

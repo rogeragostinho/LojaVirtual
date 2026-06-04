@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Categoria;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -36,7 +37,7 @@ class DashboardController extends Controller
         $userTotal = implode(',', $totalU);
         
         //grafico 2 - categorias
-        $catData = Categoria::with('produtos')->get();
+        $catData = Category::with('produtos')->get();
         
         foreach($catData as $categoria)
         {
@@ -46,8 +47,8 @@ class DashboardController extends Controller
 
 
         // formatar para chartjs
-        $categorias = implode(',', $nome);
-        $produtosTotal = implode(',', $totalP);
+        $categorias = implode(',', $nome ?? []);
+        $produtosTotal = implode(',', $totalP ?? []);
 
         //dd($produtosTotal);
 

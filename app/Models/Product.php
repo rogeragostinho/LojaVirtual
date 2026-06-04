@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Product extends Model
 {
     protected $fillable = [
-        'nome',
+        'name',
         'description',
         'slug',
         'price',
         'stock',
-        'status'
+        'status',
+        'user_id',
+        'category_id'
     ];
 
     protected function casts(): array

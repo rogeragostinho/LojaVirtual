@@ -84,6 +84,18 @@
                                 <p>Produtos</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.categories.index') }}">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Categorias</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.products.index') }}">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Produtos</p>
+                            </a>
+                        </li>
                         {{-- <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#base">
                                 <i class="fas fa-layer-group"></i>
