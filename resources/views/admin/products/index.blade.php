@@ -60,7 +60,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        @if($product->status === 'ativo')
+                                        @if($product->status === 'active')
                                             <span class="badge badge-success">Ativo</span>
                                         @else
                                             <span class="badge badge-danger">Inativo</span>

@@ -4,11 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateCategoryRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determina se o utilizador está autorizado a fazer este pedido.
      */
     public function authorize(): bool
     {
@@ -16,30 +17,37 @@ class UpdateCategoryRequest extends FormRequest
             return false;
         }
 
+        // Mantém a tua lógica de proteção para Admin e Super Admin
         return Auth::user()->isAdmin() || Auth::user()->role->value === 'super_admin';
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Define as regras de validação aplicadas ao pedido.
      */
     public function rules(): array
     {
         return [
-            // O nome é obrigatório, deve ser uma string, não pode passar de 255 caracteres e deve ser único na tabela categories
-            'name' => 'required|string|max:255|unique:categories,name',
+            // 💡 CORRIGIDO: Usamos um array para passar a regra Rule::unique() com a exceção
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                // Dizemos para ignorar o ID da categoria atual que está na rota
+                Rule::unique('categories', 'name')->ignore($this->category->id),
+            ],
             
-            // A descrição é opcional (nullable), mas se for enviada deve ser uma string
             'description' => 'nullable|string',
         ];
     }
 
+    /**
+     * Mensagens de erro personalizadas.
+     */
     public function messages(): array
     {
         return [
             'name.required' => 'O nome da categoria é obrigatório.',
-            'name.unique' => 'Já existe uma categoria registada com este nome.',
+            'name.unique' => 'Este nome já está a ser utilizado por outra categoria.',
             'name.max' => 'O nome da categoria não pode ter mais de 255 caracteres.',
         ];
     }

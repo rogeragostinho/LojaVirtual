@@ -52,7 +52,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         'categories' => CategoryController::class,
         'products' => ProductController::class
     ]);
-
+    Route::delete('products/images/{image}', [ProductController::class, 'destroyImage'])->name('products.images.destroy');
     /**
      * Produtos
      */

@@ -18,7 +18,8 @@
             <div class="card-header">
                 <div class="card-title">Modificar Produto: {{ $product->name }}</div>
             </div>
-            <form action="{{ route('admin.products.update', $product->id) }}" method="POST">
+            
+            <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -48,7 +49,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-4 mb-3">
-                            <label for="price">Preço (€) <span class="text-danger">*</span></label>
+                            <label for="price">Preço (Kz) <span class="text-danger">*</span></label>
                             <input type="number" step="0.01" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $product->price) }}" required>
                             @error('price')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -82,6 +83,15 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="form-group mb-4">
+                        <label for="images">Adicionar Novas Imagens</label>
+                        <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images[]" multiple accept="image/*">
+                        <small class="form-text text-muted">Selecione mais ficheiros se desejar expandir a galeria deste produto.</small>
+                        @error('images')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
                 
                 <div class="card-action">
@@ -89,6 +99,35 @@
                     <a href="{{ route('admin.products.index') }}" class="btn btn-danger">Cancelar</a>
                 </div>
             </form>
+
+            <div class="card-body border-top mt-3">
+                <h6 class="fw-bold mb-3"><i class="fas fa-images"></i> Imagens Atuais do Produto</h6>
+                
+                <div class="d-flex flex-wrap gap-3">
+                    @forelse($product->images as $image)
+                        <div class="position-relative border rounded p-1 text-center bg-light shadow-sm" style="width: 130px;">
+                            <img src="{{ asset($image->url) }}" 
+                                alt="Imagem de {{ $product->name }}" 
+                                class="img-fluid rounded mb-1" 
+                                style="width: 120px; height: 120px; object-fit: cover;">
+                            
+                            <form action="{{ route('admin.products.images.destroy', $image->id) }}" method="POST" onsubmit="return confirm('Deseja eliminar esta imagem permanentemente?');">
+                                @csrf
+                                @method('DELETE')
+                                
+                                <button type="submit" class="btn btn-danger btn-sm w-100" title="Eliminar Foto">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    @empty
+                        <div class="text-muted py-2">
+                            <i class="fas fa-info-circle"></i> Este produto ainda não possui nenhuma imagem associada.
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

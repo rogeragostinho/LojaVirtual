@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -46,7 +48,21 @@ class ProductController extends Controller
         // 2. Associa automaticamente o id do Admin/Super Admin que está a criar o produto
         $data['user_id'] = Auth::id();
 
-        Product::create($data);
+        $product = Product::create($data);
+
+        // 4. 💡 PROCESSAR E SALVAR AS IMAGENS (Se forem enviadas)
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                // Guarda a imagem física na pasta 'storage/app/public/products'
+                // O Laravel gera um nome único e seguro para o ficheiro automaticamente
+                $path = $image->store('products', 'public');
+
+                // Salva o caminho (URL de acesso relativo) na tabela product_images
+                $product->images()->create([
+                    'url' => 'storage/' . $path
+                ]);
+            }
+        }
 
         return redirect()
             ->route('admin.products.index')
@@ -86,6 +102,15 @@ class ProductController extends Controller
 
         $product->update($data);
 
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('products', 'public');
+                $product->images()->create([
+                    'url' => 'storage/' . $path
+                ]);
+            }
+        }
+
         return redirect()
             ->route('admin.products.index')
             ->with('success', 'Produto atualizado com sucesso!');
@@ -101,5 +126,23 @@ class ProductController extends Controller
         return redirect()
             ->route('admin.products.index')
             ->with('success', 'Produto eliminado com sucesso!');
+    }
+
+    public function destroyImage(ProductImage $image)
+{
+        // 1. Descobrir o caminho real no disco eliminando o prefixo 'storage/'
+        // Se a URL for 'storage/products/imagem.jpg', o path fica 'products/imagem.jpg'
+        $relativePath = str_replace('storage/', '', $image->url);
+
+        // 2. Eliminar o ficheiro físico da pasta storage/app/public/products
+        if (Storage::disk('public')->exists($relativePath)) {
+            Storage::disk('public')->delete($relativePath);
+        }
+
+        // 3. Eliminar o registo na tabela product_images
+        $image->delete();
+
+        // 4. Redirecionar de volta para a página de edição com uma mensagem de sucesso
+        return redirect()->back()->with('success', 'Imagem eliminada com sucesso!');
     }
 }

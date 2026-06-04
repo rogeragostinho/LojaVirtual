@@ -37,12 +37,12 @@ class DashboardController extends Controller
         $userTotal = implode(',', $totalU);
         
         //grafico 2 - categorias
-        $catData = Category::with('produtos')->get();
+        $catData = Category::with('products')->get();
         
         foreach($catData as $categoria)
         {
             $nome[] = "'".$categoria->nome."'";
-            $totalP[] = $categoria->produtos->count();
+            $totalP[] = $categoria->products->count();
         }
 
 

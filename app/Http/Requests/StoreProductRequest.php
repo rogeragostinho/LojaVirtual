@@ -43,7 +43,11 @@ class StoreProductRequest extends FormRequest
             'status' => 'required|in:active,inactive',
             
             // Categoria obrigatória, deve existir na coluna 'id' da tabela 'categories'
-            'categoria_id' => 'required|exists:categories,id',
+            'category_id' => 'required|exists:categories,id',
+
+            // 💡 ADICIONADO: Validação das imagens
+            'images' => 'nullable|array|max:5', // Limite opcional de até 5 fotos por vez
+            'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048', // Cada ficheiro deve ser imagem de até 2MB
         ];
     }
 
@@ -63,8 +67,8 @@ class StoreProductRequest extends FormRequest
             'stock.min' => 'O stock mínimo permitido é 0.',
             'status.required' => 'O status do produto é obrigatório.',
             'status.in:active,inactive' => 'O status selecionado é inválido.',
-            'categoria_id.required' => 'Selecione uma categoria para o produto.',
-            'categoria_id.exists' => 'A categoria selecionada não existe no sistema.',
+            'category_id.required' => 'Selecione uma categoria para o produto.',
+            'category_id.exists' => 'A categoria selecionada não existe no sistema.',
         ];
     }
 }

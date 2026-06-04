@@ -18,7 +18,7 @@
             <div class="card-header">
                 <div class="card-title">Preencha os dados do Produto</div>
             </div>
-            <form action="{{ route('admin.products.store') }}" method="POST">
+            <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="row">
@@ -80,6 +80,18 @@
                         <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="5" placeholder="Detalhes técnicos, materiais, tamanhos disponível, etc...">{{ old('description') }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="images">Imagens do Produto (Selecione uma ou mais)</label>
+                        <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images[]" multiple accept="image/*">
+                        <small class="form-text text-muted">Formatos permitidos: JPG, PNG, WEBP. Podes selecionar múltiplos ficheiros.</small>
+                        @error('images')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                        @error('images.*')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
