@@ -54,7 +54,9 @@ class User extends Authenticatable
         return $this->role == UserRole::ADMIN || $this->role == UserRole::SUPER_ADMIN;
     }
 
-    public function WishList(): BelongsToMany {
-        return $this->belongsToMany(Product::class, "wishlist");
+    public function favoriteProducts()
+    {
+        // Indica que o utilizador tem muitos produtos através da tabela 'wishlist'
+        return $this->belongsToMany(Product::class, 'wishlist', 'user_id', 'product_id')->withTimestamps();
     }
 }

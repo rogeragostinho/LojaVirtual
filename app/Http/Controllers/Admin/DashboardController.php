@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Categoria;
 use App\Models\Category;
+use App\Models\Order; // Certifica-te de que tens o Model Order criado
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $usuarios = User::all()->count();
+        // 1. Métricas dos Cards Principais
+        $totalUsuarios = User::count();
+        
+        // Exemplo de agregação de faturamento real baseado nos teus Pedidos (ajusta se usares outro campo)
+        $faturamento = Order::where('status', OrderStatus::PAID)->sum('total') ?? 0;
+        
+        // Pedidos criados no mês atual
+        $pedidosMes = Order::whereMonth('created_at', now()->month)
+                            ->whereYear('created_at', now()->year)
+                            ->count();
 
-        //grafico 1 - usuarios
+        // 2. Gráfico 1 - Aquisição de Usuários por Ano (Formatado nativamente para JSON)
         $usersData = User::select([
             DB::raw('YEAR(created_at) as ano'),
             DB::raw('COUNT(*) as total')
@@ -23,35 +33,24 @@ class DashboardController extends Controller
         ->orderBy('ano', 'asc')
         ->get();
 
-        foreach($usersData as $user)
-        {
-            $ano[] = $user->ano;
-            $totalU[] = $user->total;
-        }
-
-        //dd($usersData);
-        //formatar para chartjs
-
-        $userLabel = "'Comparativo de cadastros de usuários'";
-        $userAno = implode(',', $ano);
-        $userTotal = implode(',', $totalU);
+        $userAno = $usersData->pluck('ano')->toArray();
+        $userTotal = $usersData->pluck('total')->toArray();
         
-        //grafico 2 - categorias
-        $catData = Category::with('products')->get();
+        // 3. Gráfico 2 - Distribuição de Produtos por Categoria
+        // Contamos os produtos diretamente via banco usando withCount para não sobrecarregar a memória
+        $catData = Category::withCount('products')->get();
         
-        foreach($catData as $categoria)
-        {
-            $nome[] = "'".$categoria->nome."'";
-            $totalP[] = $categoria->products->count();
-        }
+        $categoriasLabels = $catData->pluck('name')->toArray(); // Alterado de 'nome' para 'name'
+        $produtosTotais = $catData->pluck('products_count')->toArray();
 
-
-        // formatar para chartjs
-        $categorias = implode(',', $nome ?? []);
-        $produtosTotal = implode(',', $totalP ?? []);
-
-        //dd($produtosTotal);
-
-        return view('admin.dashboard', compact('usuarios', 'userLabel', 'userAno', 'userTotal', 'categorias', 'produtosTotal'));
+        return view('admin.dashboard', [
+            'usuarios'      => $totalUsuarios,
+            'faturamento'   => $faturamento,
+            'pedidosMes'    => $pedidosMes,
+            'userAno'       => json_encode($userAno),
+            'userTotal'     => json_encode($userTotal),
+            'categorias'    => json_encode($categoriasLabels),
+            'produtosTotal' => json_encode($produtosTotais),
+        ]);
     }
 }

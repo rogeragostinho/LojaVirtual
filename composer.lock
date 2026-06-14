@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9c5c4da3f0b7cf3eddcb46f326c6cd7",
+    "content-hash": "32159df7f72144ee3cb697333ce0b74d",
     "packages": [
         {
             "name": "brick/math",
@@ -5764,6 +5764,72 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.4.0"
             },
             "time": "2025-12-02T11:56:42+00:00"
+        },
+        {
+            "name": "ultrono/laravelshoppingcart-1",
+            "version": "4.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ultrono/laravelshoppingcart-1.git",
+                "reference": "f9ad8c3bf8e7b99d88d89d8cfbf67a76ba6c4e0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ultrono/laravelshoppingcart-1/zipball/f9ad8c3bf8e7b99d88d89d8cfbf67a76ba6c4e0d",
+                "reference": "f9ad8c3bf8e7b99d88d89d8cfbf67a76ba6c4e0d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^11.0|^12.0",
+                "illuminate/translation": "^11.0|^12.0",
+                "illuminate/validation": "^11.0|^12.0",
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4.2",
+                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.0|^9.5|^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Cart": "Darryldecode\\Cart\\Facades\\CartFacade"
+                    },
+                    "providers": [
+                        "Darryldecode\\Cart\\CartServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Darryldecode\\": "src/Darryldecode"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Darryl Fernandez",
+                    "email": "engrdarrylfernandez@gmail.com"
+                },
+                {
+                    "name": "Rob Allport",
+                    "email": "rob@f9web.co.uk"
+                }
+            ],
+            "description": "Laravel 11 and above Shopping cart",
+            "keywords": [
+                "cart",
+                "laravel",
+                "shopping cart"
+            ],
+            "support": {
+                "source": "https://github.com/ultrono/laravelshoppingcart-1/tree/4.3.5"
+            },
+            "time": "2026-01-11T14:20:02+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

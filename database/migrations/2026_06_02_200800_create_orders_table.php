@@ -17,6 +17,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->decimal('total', 10, 2); // Mudado para decimal para armazenar valores monetários corretamente
             $table->enum('status', ['pending', 'paid', 'shipped', 'cancelled'])->default('pending');
+            
+            // Novos campos
+            $table->string('phone');           
+            $table->string('province');         
+            $table->text('address');
+            
 
             $table->timestamps();
         });

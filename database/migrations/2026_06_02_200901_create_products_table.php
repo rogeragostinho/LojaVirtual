@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->tinyText('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->decimal('price', 10, 2); // Define 2 casas decimais para dinheiro
             $table->integer('stock');

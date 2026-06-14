@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
-use App\Models\Categoria;
+use App\Enums\UserRole;
 use App\Models\Category;
+use Illuminate\Support\Facades\View as FacadesView;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,7 +25,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $categoriasMenu = Category::all();
-        view()->share('categoriasMenu', $categoriasMenu);
+        // Partilha a variável $categoriesMenu com o layout da navbar automaticamente
+        FacadesView::composer('public.layout.index', function ($view) {
+            $view->with('categoriesMenu', Category::orderBy('name')->get());
+        });
+
+
+        Gate::define('access-super-admin', function ($user) {
+            return $user->role === UserRole::SUPER_ADMIN;
+        });
+
+        // FORÇA O LARAVEL A USAR O COMPONENTE DE PAGINAÇÃO DO BOOTSTRAP 5
+        Paginator::useBootstrapFive();
     }
 }
