@@ -65,7 +65,13 @@ docker compose exec app php artisan migrate
 docker compose exec app bash -c "chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R 775 /var/www/storage /var/www/bootstrap/cache"
 ```
 
-### 8. Aceder à aplicação
+### 8. Criar link simbólico para ficheiros públicos
+
+```bash
+docker compose exec app php artisan storage:link
+```
+
+### 9. Aceder à aplicação
 
 Abre o browser em: [http://localhost:8000](http://localhost:8000)
 
