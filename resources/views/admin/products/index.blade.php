@@ -53,14 +53,14 @@
                                     <td>
                                         <span class="badge bg-secondary">{{ $product->category->name ?? 'Sem categoria' }}</span>
                                     </td>
-                                    <td>{{ number_format($product->price, 2, ',', '.') }} €</td>
+                                    <td>{{ number_format($product->price, 2, ',', '.') }} Kz</td>
                                     <td>
                                         <span class="{{ $product->stock == 0 ? 'text-danger fw-bold' : '' }}">
                                             {{ $product->stock }} un.
                                         </span>
                                     </td>
                                     <td>
-                                        @if($product->status === 'active')
+                                        @if($product->status == \App\Enums\ProductStatus::ACTIVE)
                                             <span class="badge badge-success">Ativo</span>
                                         @else
                                             <span class="badge badge-danger">Inativo</span>

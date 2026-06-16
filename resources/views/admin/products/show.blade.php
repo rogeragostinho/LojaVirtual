@@ -41,7 +41,7 @@
                             <tr>
                                 <th>Status na Loja:</th>
                                 <td>
-                                    @if($product->status === 'active' || $product->status === 'ativo')
+                                    @if($product->status == \App\Enums\ProductStatus::ACTIVE)
                                         <span class="badge badge-success">Visível / Ativo</span>
                                     @else
                                         <span class="badge badge-danger">Oculto / Inativo</span>

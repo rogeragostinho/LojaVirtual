@@ -1,0 +1,116 @@
+=========== Minhas ideias ==================
+
+eu comecei a programar em 2020, no meu primeiro ano do ensino médio, fiz informatica no médio, estou agora no 2º de engenharia informática na UCAN, e meu foco sempre foi programação. o meu forte é o desenvolvimento web, principalmente no lado do backend, gosto de trabalhar coisas estruturadas, que fazem sentido, sou bom em modelagem e criação de base de dados, possuo também conhecimento de desenvolvimento frontend, apesar de design não ser o meu forte, um pouco de flutter tambem, voltando ao backend, venho estudando também spring boot a fim de aprimorar cada vez mais os meus conhecimentos. Tenho alguns projetos, todos foram desenvolvidos para fins de aprendizado e experiencia mesmo, tem o NexaStore, uma loja virtual com carrinho, checkout e painel admin, um sistema que desenvolvi durante o meu periodo de estágio(detalhar mais), para uso interno na empresa, além do projeto que desenvolvi para a defesa de fim de curso do ensino médio
+
+antes de entrar para o mundo de desenvolver os projetos como tal, eu pensava que tinha que saber o maximo possivel das tecnologias, e quando eu fui tentar desenvolver o primeiro projeto, simplesmente travei, foi aí que nasceu uma obcessão por entender bem todo o processo antes da codificação, a ideia, a modelação, projeção. Quanto a parte da codificação em si, existe sempre os famosos bugs, mas nada que nunca deu pra resolver
+
+Agora falando do meu projeto cazengaimoveis, os desafios que eu mais encontrei foi alinhar o mesmo com as expetativas do orientador, entender bem a sua visão e conseguir implementar isso, pois naquela altura, eu pensava mais no software em si, em vez de olhar para o problema que ele resolve
+
+============================================
+
+o que acha que é mais importante num software para a área de seguros?:
+"Fiabilidade e rastreabilidade. Qualquer operação financeira ou de apólice tem impacto real para o cliente, por isso os dados têm de ser íntegros, todas as acções têm de ser auditáveis, e o sistema tem de estar sempre disponível."
+
+1.O que é uma base de dados relacional e por que é importante?
+2.O que é normalização?
+3.O que é uma transacção na base de dados?
+4.O que é autenticação vs autorização?
+5.Como garantes a segurança de uma API?
+6.O que é versionamento de código e como trabalhas com Git?
+7.O que são boas práticas de código — SOLID, clean code?
+
+1)R: Uma base de dados relacional organiza os dados em tabelas relacionadas entre si através de chaves primárias e estrangeiras. É importante porque evita redundância, mantém a integridade dos dados e facilita consultas complexas.
+
+2)R: Normalização é o processo de organizar os dados para reduzir redundâncias e evitar inconsistências.
+
+3)R: Uma transação é um conjunto de operações executadas como uma única unidade. Ou todas são concluídas com sucesso ou nenhuma é aplicada.
+
+4)R: Autenticação responde "Quem és?" e autorização responde "O que podes fazer?".
+
+5)R: Eu procuraria implementar autenticação através de tokens, validar todos os dados recebidos, usar HTTPS, controlar permissões dos utilizadores, proteger contra SQL Injection utilizando ORM ou queries parametrizadas, e nunca expor informações sensíveis nas respostas da API.
+
+6)R: Versionamento permite acompanhar alterações no código ao longo do tempo. Utilizo Git para registar mudanças, criar branches para novas funcionalidades e fazer merge quando as alterações estão concluídas.
+
+7)R: Clean Code
+É escrever código fácil de ler, compreender e manter.
+Exemplos:
+
+Nomes claros.
+Funções pequenas.
+Evitar duplicação.
+Comentários apenas quando necessários.
+
+SOLID
+Memoriza isto:
+
+S — Single Responsibility Principle
+Uma classe deve ter apenas uma responsabilidade.
+
+O — Open/Closed Principle
+O código deve permitir extensão sem alterar o que já funciona.
+
+L — Liskov Substitution Principle
+Classes filhas devem poder substituir as classes pais sem quebrar o sistema.
+
+I — Interface Segregation Principle
+Interfaces devem ser específicas e não obrigar implementação desnecessária.
+
+D — Dependency Inversion Principle
+Devemos depender de abstrações e não de implementações concretas.
+
+
+Usa esta estrutura:
+Problema
+O objetivo era facilitar a pesquisa e gestão de imóveis.
+
+Solução
+Desenvolvi uma aplicação web em Laravel que permite o registo, atualização e pesquisa de imóveis.
+
+Tecnologias
+Laravel, PHP, MySQL, HTML, CSS e JavaScript.
+
+O teu papel
+Desenvolvi toda a aplicação, incluindo modelação da base de dados, backend, frontend e autenticação.
+
+Desafio
+Um dos desafios foi estruturar corretamente os relacionamentos da base de dados e organizar o sistema para facilitar futuras funcionalidades.
+
+2. PERGUNTAS DE BACKEND QUE PODEM APARECER
+O que acontece quando digitamos um site no navegador?
+Resposta resumida:
+O navegador procura o IP através do DNS, envia uma requisição HTTP ao servidor, o backend processa a requisição, consulta a base de dados se necessário e devolve uma resposta ao navegador.
+
+O que é uma API?
+Uma API é uma interface que permite a comunicação entre diferentes sistemas através de requisições e respostas.
+
+Diferença entre GET e POST?
+
+GET:
+Consultar dados.
+
+POST:
+Criar dados.
+
+PUT e PATCH?
+PUT:
+Atualização completa.
+
+PATCH:
+Atualização parcial.
+
+O que é JSON?
+É um formato de troca de dados muito utilizado entre frontend e backend.
+
+O que é uma chave estrangeira?
+Campo que referencia uma tabela diferente.
+
+O que é um JOIN?
+Permite combinar dados de várias tabelas relacionadas.
+
+O que é um índice?
+Estrutura que acelera pesquisas na base de dados.
+
+Quando usar índice?
+
+Campos pesquisados frequentemente:
+email, número da apólice, NIF
